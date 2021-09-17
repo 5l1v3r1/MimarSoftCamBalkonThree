@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Repository.Entities.Auth.AspNetUser>
+@{ ViewData["Title"] = "Users";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+
+<h4>Users</h4>
+<table class="table">
+    <tr>
+        <th>UserId</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Email</th>
+        <th>PhoneNumber</th>
+        <th>Status</th>
+        <th>Update</th>
+    </tr>
+    <tbody>
+        @foreach (var usr in Model)
+        {
+            <tr>
+                <td>@usr.Id</td>
+                <td>@usr.FirstName</td>
+                <td>@usr.LastName</td>
+                <td>@usr.Email</td>
+                <td>@usr.PhoneNumber</td>
+                <td>@usr.Status</td>
+                <td>
+                    <p class="p-2">
+                        'UI.WebMvcCore.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\5.0.8\System.Diagnostics.StackTrace.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+                        'UI.WebMvcCore.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\5.0.8\System.Reflection.Metadata.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+                        The program '[13048] UI.WebMvcCore.exe' has exited with code -1073741510 (0xc000013a).
+                        The program '[13048] UI.WebMvcCore.exe: Program Trace' has exited with code 0 (0x0).
+                    </p>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

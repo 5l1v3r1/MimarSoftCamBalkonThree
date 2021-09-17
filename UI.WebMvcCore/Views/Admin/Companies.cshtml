@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Producer>
+
+@{ ViewData["Title"] = "Factories";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+
+<h4>Companies</h4>
+<p>
+    <a asp-action="" asp-controller="Admin">Yeni Ekle</a>
+</p>
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Title</td>
+                    <td>Update</td>
+                    <td>Delete</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

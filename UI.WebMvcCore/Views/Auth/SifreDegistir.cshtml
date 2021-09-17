@@ -1,0 +1,113 @@
+﻿@{ ViewBag.Title = "Şifre Degistir"; }
+
+<style type="text/css">
+    .uyeKayitIcerik {
+        margin-top: 10px;
+    }
+
+    #sifreAyni .modal-header i {
+        color: #ff6a00;
+    }
+
+    .modal-body {
+        text-align: center;
+    }
+
+    .modal-header {
+        text-align: center;
+    }
+
+    @@media (max-width: 767px) {
+        .uyeKayitIcerik {
+            padding: 0 !important;
+        }
+        /*.formParca {
+            padding: 0 !important;
+        }*/
+    }
+</style>
+<div class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 uyeKayitIcerik">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-3">
+                    <i class="fa fa-user fa-2x"></i>
+                </div>
+                <div class="col-xs-9 text-right">
+                    <div class="panelBaslik">ŞİFRE<b> DEĞİŞTİR</b></div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="col-md-12 vitrin formParca">
+                @using (Html.BeginForm("", "", FormMethod.Post, new { role = "form", id = "uyeForm", name = "uyeForm" }))
+                {@*<div class="col-md-12">*@
+                <label for="eskiSifre">@*Şifre Tekrarı*@</label>
+                <div class="input-group  input-group-lg">
+                    <span class="input-group-addon" id="eskiSifre"><i class="fa fa-lock"></i></span>
+                    <input name="eskiSifre" id="eskiSifre" max="50" type="password" class="form-control" placeholder="Eski şifrenizi giriniz" required aria-describedby="sifreTekrar" />
+                </div>
+                <label for="sifre">@*Şifre*@</label>
+                <div class="input-group  input-group-lg">
+                    <span class="input-group-addon" id="eposta"><i class="fa fa-key"></i></span>
+                    <input name="sifre" id="sifre" max="50" type="password" class="form-control" placeholder="Yeni Şifre giriniz" required aria-describedby="sifre" />
+                </div>
+                <label for="sifreTekrar">@*Şifre Tekrarı*@</label>
+                <div class="input-group  input-group-lg">
+                    <span class="input-group-addon" id="eposta"><i class="fa fa-key"></i></span>
+                    <input name="sifreTekrar" id="sifreTekrar" max="50" type="password" class="form-control" placeholder="Şifreyi tekrar giriniz" required aria-describedby="sifreTekrar" />
+                </div> @*<div class="col-md-12">
+                        <label for="eskiSifre">Eski Şifre</label>
+                        <input name="eskiSifre" id="eskiSifre" type="password" max="50" class="form-control" placeholder="Eski Şifre" required />
+                    </div>
+                    <div class="col-md-12">
+                        <label for="sifre">Yeni Şifre</label>
+                        <input name="sifre" id="sifre" type="password" max="50" class="form-control" placeholder="Yeni Şifre" required />
+                    </div>
+                    <div class="col-md-12">
+                        <label for="sifreTkr">Yeni Şifre Tekrarı</label>
+                        <input name="sifreTkr" id="sifreTkr" type="password" max="50" class="form-control" placeholder="Yeni Şifre Tekrarı" required />
+                    </div>*@
+                <button type="submit" class="form-control btn-success g-recaptcha" value="" id="gonder" name="gonder">
+                    ŞİFRE DEĞİŞTİR
+                </button> @*<div class="col-md-12">
+                    </div>*@ @*</div>*@}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+<div id="sifreAyni" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fa fa-exclamation-triangle fa-3x"></i>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <span>   Lütfen Şifrenizi ve Şifre Tekrarını Dikkatli Giriniz!</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script type="text/javascript">
+$(function () {
+
+        $(".formParca button").click(function (e) {
+
+            var sifre1 = $("#sifre").val();
+            var sifre2 = $("#sifreTkr").val();
+            if (sifre1 != sifre2) {
+                $('#sifreAyni').modal('toggle');
+                $("#sifreTkr").focus();
+                e.preventDefault();
+                return false;
+            }
+
+        });
+    });//document ready</script>

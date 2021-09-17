@@ -1,0 +1,108 @@
+﻿{
+  "CodeGenerationMode": 0,
+  "ContextClassName": "RepositoryContext",
+  "ContextNamespace": null,
+  "DefaultDacpacSchema": null,
+  "FilterSchemas": false,
+  "IncludeConnectionString": true,
+  "ModelNamespace": "Concrete",
+  "OutputContextPath": null,
+  "OutputPath": "Concrete",
+  "ProceduresReturnList": false,
+  "ProjectRootNamespace": "Repository.Entities",
+  "Schemas": null,
+  "SelectedHandlebarsLanguage": 0,
+  "SelectedToBeGenerated": 0,
+  "Tables": [
+    {
+      "Name": "[dbo].[AspNetRoleClaims]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[AspNetRoles]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[AspNetUserClaims]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[AspNetUserLogins]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[AspNetUserRole]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[AspNetUsers]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[AspNetUserTokens]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[Categories]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[DealerPersonels]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[Dealers]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[Dealers_To_Producers]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[OrderDetails]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[Orders]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[ProducerPersonels]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[Producers]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[ProductParts]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[ProductParts_To_Producers]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[Products]",
+      "ObjectType": 0
+    },
+    {
+      "Name": "[dbo].[ProductTypes]",
+      "ObjectType": 0
+    }
+  ],
+  "UiHint": "DESKTOP-1D8J0D7.Mimar-Soft-Database-06ST8W-TT41",
+  "UseBoolPropertiesWithoutDefaultSql": false,
+  "UseDatabaseNames": false,
+  "UseDbContextSplitting": false,
+  "UseFluentApiOnly": false,
+  "UseHandleBars": false,
+  "UseInflector": true,
+  "UseLegacyPluralizer": false,
+  "UseNoConstructor": false,
+  "UseNoNavigations": false,
+  "UseNoObjectFilter": false,
+  "UseNodaTime": false,
+  "UseNullableReferences": false,
+  "UseSpatial": false
+}

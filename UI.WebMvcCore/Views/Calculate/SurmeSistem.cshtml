@@ -1,0 +1,116 @@
+﻿@model BalconyCalculateDto
+
+@{ ViewData["Title"] = "Surme Sistem";
+    Layout = "~/Views/Shared/_LayoutMimarSoft.cshtml"; }
+
+<h1 name="BalkonMalzemeModeli">Sürme Sistem</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <label>Balkon Tipi</label>
+            <select class="form-control form-select" id="balkonModelSecin" tabindex="1">
+                <option selected>Balkon Tipi Seçiniz</option>
+                <option value="Calculate/TrendCalculate">Trend Süper Lüks</option>
+                <option value="Calculate/IsiCamSistem">Isı Cam Sistem</option>
+                <option value="Calculate/SurmeSistem">Sürme Sistem</option>
+            </select>
+        </div>
+    </div>
+    <hr />
+
+    <form asp-action="SurmeSistem" asp-controller="Calculate" method="post">
+
+        <input name="BalkonMalzemeModeli" hidden value="Sürme Sistem" />
+        <div class="row">
+            <div class="col-md-4">
+                <label asp-for="ProfileLength">Profil Boy</label>
+                <select class="form-control form-select" multiple id="profilBoySelect" asp-for="ProfileLength">
+                </select>
+
+                <hr />
+                <div class="input-group">
+                    <button class="btn btn-primary" type="button" id="profilBoyButton">Ekle</button>
+                    <input type="number" min="50" max="25000" class="form-control" id="profilBoyInput" tabindex="2">
+                    <span class="input-group-text">mm</span>
+                </div>
+                <br />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="GlassCount">Cam Adet</label>
+                <select class="form-control form-select" multiple id="camAdetSelect" asp-for="GlassCount">
+                </select>
+
+                <hr />
+                <div class="input-group">
+                    <button class="btn btn-primary" type="button" id="camAdetButton">Ekle</button>
+                    <input type="number" min="1" max="255" class="form-control" id="camAdetInput" tabindex="3">
+                    <span class="input-group-text">adet</span>
+                </div>
+                <br />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="ProfileAngle">Profil Açı</label>
+                <select class="form-control" multiple id="profilAciSelect" asp-for="ProfileAngle">
+                </select>
+
+                <hr />
+                <div class="input-group">
+                    <button class="btn btn-primary" type="button" id="profilAciButton">Ekle</button>
+                    <input type="number" min="0" max="360" class="form-control" id="profilAciInput" tabindex="4">
+                    <span class="input-group-text">α°</span>
+                </div>
+                <br />
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <label for="EsikliMi">Eşik Durumu</label>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" asp-for="EsikliMi" tabindex="5" name="EsikliMi" />
+                        Eşikli mi? Evet ise işaretleyin
+                    </label>
+                </div>
+                <hr />
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="GlassType">Cam Tipi</label>
+                    <select class="form-control" asp-for="GlassType" id="GlassType">
+                        <option value="Cam Tipi Seçiniz">Cam Tipi Seçiniz</option>
+                        <option value="8mm cam">8mm cam</option>
+                        <option value="Isı cam">Isı cam</option>
+                    </select>
+                </div>
+                <hr />
+            </div>
+            <div class="col-md-4">
+                <label for="BalconyHeight">Balkon Yükseklik</label>
+                <input type="number" min="500" max="5000" class="form-control" asp-for="BalconyHeight" id="BalconyHeight" tabindex="7">
+                <hr />
+            </div>
+        </div>
+
+        <div class="container">
+            <input name="indexList" hidden />
+            <div class='row checkboxKapsayici'>
+                <!-- checkGrup -->
+            </div>
+        </div>
+
+        <input class="btn btn-primary float-right float-lg-right float-md-right float-xl-right" type="submit" onClick="selectAll();" id="hesapla" value="Hesapla" tabindex="8" />
+
+        <div class="clearfix"></div>
+    </form>
+    <br />
+
+    <br />
+</div>
+
+<script src="~/js/Calculate.js"></script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

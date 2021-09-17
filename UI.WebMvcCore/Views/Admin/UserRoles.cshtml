@@ -1,0 +1,73 @@
+﻿@model UsersAndRolesDto
+@using Repository.Entities.DTOs
+@using Repository.Entities.Auth
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    bool kayitDurum = ViewBag.kayitDurum == true ? true : false;
+}
+
+<div class="form-group">
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td>Email</td>
+                    <td>Yetki</td>
+                    <td>Edit</td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.AspNetUsers != null)
+                {
+                    foreach (var usr in Model.AspNetUsers)
+                    {
+                        using (Html.BeginForm("UserRoles", "Admin", FormMethod.Post, new { id = "roleForm" }))
+                        {
+                            <tr>
+                                <td>@Model.AspNetUsers.FirstOrDefault(x => x.Id == usr.Id).Email</td>
+                                <td>
+                                    <select class="form-group" id="@usr.Id" name="selectedIndex" onchange="changeSelect(this,'@usr.Id');">
+                                        @foreach (var rol in Model.AspNetRoles)
+                                        {
+                                            var usrRole = Model.AspNetUserRoles.FirstOrDefault(x => x.UserId == usr.Id && x.RoleId == rol.Id);
+                                            <option value="@rol.Id" selected="@((usrRole != null) ? true : false)">@rol.Name</option>
+
+                                        }
+                                    </select>
+                                    <input type="hidden" value="" name="roleId" id="roleId_@usr.Id" />
+                                </td>
+                                <td>
+                                    <input type="hidden" value="@usr.Id" name="userId" />
+                                    <button type="submit" class="form-group btn btn-secondary">Kaydet</button>
+                                    <button type="submit" class="form-group btn btn-danger">Sil</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        function changeSelect(e, id) {
+            if (id != null) {
+
+                $('#roleId_' + id).val(e.options[e.selectedIndex].value);
+                alert($('#roleId_' + id).val())
+            }
+        }
+            @if (ViewBag.kayitDurum != null)
+            {
+                <text>
+                $(document).ready(function () {
+                    alert('Kayıt Başarılı');
+                });
+                </text>
+            }
+
+    </script>
+}
