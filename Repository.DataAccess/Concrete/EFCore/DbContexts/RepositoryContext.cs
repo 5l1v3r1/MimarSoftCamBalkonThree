@@ -39,6 +39,7 @@ namespace Repository.DataAccess.Concrete.EFCore.DbContexts
         {
             if (!optionsBuilder.IsConfigured)
             {
+                //optionsBuilder.UseSqlServer("Data Source=77.245.159.18\\MSSQLSERVER2019;Initial Catalog=MimarSoft-Orguntay-06ST8W-T1T46;User Id=akr3p;Password=h~re67N5;Integrated Security=True;MultipleActiveResultSets=True");
                 optionsBuilder.UseSqlServer("Data Source=DESKTOP-TUU483Q;Initial Catalog=MimarSoft-Orguntay-06ST8W-T1T46;Integrated Security=True;MultipleActiveResultSets=True");
             }
         }
