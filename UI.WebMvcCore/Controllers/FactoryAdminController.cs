@@ -47,6 +47,7 @@ namespace UI.WebMvcCore.Controllers
                           select p.RoleId).First();
 
             var usersRoles = _adminService.GetAllUserRoles().Where(x => Int32.Parse(x.RoleId) > Int32.Parse(roleId));
+            var roles = _adminService.GetAllRoles().Where(x => Int32.Parse(x.Id) > Int32.Parse(roleId));
 
             //int diziBoy = userRoleId.Count();
             //int[] listRoleId = new int[diziBoy];
@@ -75,9 +76,9 @@ namespace UI.WebMvcCore.Controllers
             }
 
             List<AspNetRole> roleList = new List<AspNetRole>();
-            foreach (var rl in usersRoles)
+            foreach (var rl in roles)
             {
-                var rol = _adminService.GetListRoles(x => x.Id == rl.RoleId).First();
+                var rol = _adminService.GetListRoles(x => x.Id == rl.Id).First();
                 roleList.Add(rol);
             }
             _usersAndRolesDto.AspNetUsers = userList;
@@ -91,52 +92,36 @@ namespace UI.WebMvcCore.Controllers
         //[ValidateAntiForgeryToken]
         public IActionResult UserRoles(string userId, string roleId)
         {
-            var claims = User.Claims; // roller
-            var usrId = claims.First().Value; // login olan kullanici id'si
+            var claims = User.Claims;
+            var usrId = claims.First().Value;
 
-            var userRoleId = (from p in _adminService.GetAllUserRoles()
-                              where p.UserId == usrId
-                              select p.RoleId).ToList(); // login olan kullanici roleId'leri string
+            var roleIdd = (from p in _adminService.GetAllUserRoles()
+                           where p.UserId == usrId
+                           select p.RoleId).First();
 
-            int diziBoy = userRoleId.Count();
-            int[] listRoleId = new int[diziBoy]; // int roleId dizisi
-
-            for (int i = 0; i < diziBoy; i++)
-            {
-                listRoleId[i] = Convert.ToInt32(userRoleId[i]);
-            }
-
-            int minRoleId = Min(listRoleId); // login olan kullanici min roleId integer
-
-            var AllRole = (from p in _adminService.GetAllRoles()
-                           where Convert.ToInt32(p.Id) > minRoleId
-                           select p).ToList();
-
-            var AllUserRole = (from p in _adminService.GetAllUserRoles()
-                               where Convert.ToInt32(p.RoleId) > minRoleId
-                               select p).ToList();
-
-            _usersAndRolesDto.AspNetUserRoles = AllUserRole;
+            var usersRoles = _adminService.GetAllUserRoles().Where(x => Int32.Parse(x.RoleId) > Int32.Parse(roleIdd));
+            var roles = _adminService.GetAllRoles().Where(x => Int32.Parse(x.Id) > Int32.Parse(roleIdd));
 
             List<AspNetUser> userList = new List<AspNetUser>();
-            foreach (var userr in AllUserRole)
+            foreach (var userr in usersRoles)
             {
-                var usr = _adminService.GetListUsers(x => x.Id == userr.UserId).First();
+                var usr = _adminService.GetAllUsers().Single(x => x.Id == userr.UserId);
                 userList.Add(usr);
             }
-            _usersAndRolesDto.AspNetUsers = userList;
 
             List<AspNetRole> roleList = new List<AspNetRole>();
-            foreach (var rl in AllRole)
+            foreach (var rl in roles)
             {
                 var rol = _adminService.GetListRoles(x => x.Id == rl.Id).First();
                 roleList.Add(rol);
             }
+            _usersAndRolesDto.AspNetUsers = userList;
+            _usersAndRolesDto.AspNetUserRoles = usersRoles.ToList();
             _usersAndRolesDto.AspNetRoles = roleList;
 
-            if (usrId != null && roleId != null)
+            if (userId != null && roleId != null)
             {
-                AspNetUserRole sorgu = _usersAndRolesDto.AspNetUserRoles.Find(x => x.UserId == usrId);
+                AspNetUserRole sorgu = _usersAndRolesDto.AspNetUserRoles.Find(x => x.UserId == userId);
                 _adminService.Delete(sorgu);
 
                 sorgu.RoleId = roleId;
@@ -150,38 +135,18 @@ namespace UI.WebMvcCore.Controllers
             }
             return View(_usersAndRolesDto);
 
-            // ********************************************************
-            //_usersAndRolesDto.AspNetUsers = _adminService.GetAllUsers();
-            //_usersAndRolesDto.AspNetRoles = _adminService.GetAllRoles();
-            //_usersAndRolesDto.AspNetUserRoles = _adminService.GetAllUserRoles();
-            //if (usrId != null && roleId != null)
-            //{
-            //    AspNetUserRole sorgu = _usersAndRolesDto.AspNetUserRoles.Find(x => x.UserId == usrId);
-            //    _adminService.Delete(sorgu);
-
-            //    sorgu.RoleId = roleId;
-            //    _adminService.Add(sorgu);
-            //    //_adminService.Update(sorgu);
-            //    ViewBag.kayitDurum = true;
-            //}
-            //else
-            //{
-            //    NotFound();
-            //}
-
-            //return View(_usersAndRolesDto);
         }
 
-        private int Min(int[] sayilar)
-        {
-            int kucuk = sayilar[0];
+        //private int Min(int[] sayilar)
+        //{
+        //    int kucuk = sayilar[0];
 
-            for (int i = 0; i < sayilar.Length; i++)
-            {
-                if (kucuk > sayilar[i])
-                { kucuk = sayilar[i]; }
-            }
-            return kucuk;
-        }
+        //    for (int i = 0; i < sayilar.Length; i++)
+        //    {
+        //        if (kucuk > sayilar[i])
+        //        { kucuk = sayilar[i]; }
+        //    }
+        //    return kucuk;
+        //}
     }
 }

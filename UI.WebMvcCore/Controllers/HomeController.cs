@@ -21,7 +21,7 @@ namespace UI.WebMvcCore.Controllers
         //    return Redirect("/Account/Login?ReturnUrl=" + ReturnUrl);
         //}
 
-        [Authorize(Roles = "Users,Dealers,Factories,Yetkili,AKR3P")]
+        [Authorize(Roles = "USER,BAYİİ,FABRİKA,YÖNETİM,AKR3P")]
         public IActionResult Demo()
         {
             return View();

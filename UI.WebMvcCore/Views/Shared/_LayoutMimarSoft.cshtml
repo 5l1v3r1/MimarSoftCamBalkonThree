@@ -59,12 +59,12 @@
                             } }
                         @{ if (User.Identity.IsAuthenticated)
                             {
-                                var role = User.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Role).FirstOrDefault(x => x.Value == "AKR3P");
+                                var role = User.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Role).FirstOrDefault(x => x.Value == "AKR3P" || x.Value == "YÖNETİM" || x.Value == "FABRİKA");
                                 var result = (role == null) ? "" : role.Value;
-                                if (result == "AKR3P")
+                                if (result == "AKR3P" || result == "YÖNETİM" || result == "FABRİKA")
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-controller="" asp-action="Index">Admin</a>
+                                        <a class="nav-link text-dark" asp-controller="FactoryAdmin" asp-action="UserRoles">Admin</a>
                                     </li>
                                 }
                             } }
