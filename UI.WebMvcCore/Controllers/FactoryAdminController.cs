@@ -20,8 +20,6 @@ namespace UI.WebMvcCore.Controllers
         private readonly IAdminService _adminService;
         private UsersAndRolesDto _usersAndRolesDto;
 
-
-
         public FactoryAdminController(
             UserManager<AspNetUser> userManager,
             SignInManager<AspNetUser> signInManager,
@@ -32,6 +30,7 @@ namespace UI.WebMvcCore.Controllers
             _adminService = adminService;
             _usersAndRolesDto = new UsersAndRolesDto();
         }
+
         public IActionResult Index()
         {
             return View();
@@ -40,49 +39,50 @@ namespace UI.WebMvcCore.Controllers
         [HttpGet]
         public IActionResult UserRoles()
         {
-            var claims = User.Claims; // roller
-            var userId = claims.First().Value; // login olan kullanici id'si
+            var claims = User.Claims;
+            var usrId = claims.First().Value;
 
-            var userRoleId = (from p in _adminService.GetAllUserRoles()
-                              where p.UserId == userId
-                              select p.RoleId).ToList(); // login olan kullanici roleId'leri string            
+            var roleId = (from p in _adminService.GetAllUserRoles()
+                          where p.UserId == usrId
+                          select p.RoleId).First();
 
-            int diziBoy = userRoleId.Count();
-            int[] listRoleId = new int[diziBoy]; // int roleId dizisi
+            var usersRoles = _adminService.GetAllUserRoles().Where(x => Int32.Parse(x.RoleId) > Int32.Parse(roleId));
 
-            for (int i = 0; i < diziBoy; i++)
-            {
-                listRoleId[i] = Convert.ToInt32(userRoleId[i]);
-            }
+            //int diziBoy = userRoleId.Count();
+            //int[] listRoleId = new int[diziBoy];
 
-            int minRoleId = Min(listRoleId); // login olan kullanici min roleId integer
+            //for (int i = 0; i < diziBoy; i++)
+            //{
+            //    listRoleId[i] = Convert.ToInt32(userRoleId[i]);
+            //}
 
-            var AllRole = (from p in _adminService.GetAllRoles()
-                           where Convert.ToInt32(p.Id) > minRoleId
-                           select p).ToList();
+            //int minRoleId = Min(listRoleId);
 
-            var AllUserRole = (from p in _adminService.GetAllUserRoles()
-                               where Convert.ToInt32(p.RoleId) > minRoleId
-                               select p).ToList();
+            //var AllRole = (from p in _adminService.GetAllRoles()
+            //               where Convert.ToInt32(p.Id) > minRoleId
+            //               select p).ToList();
 
-            _usersAndRolesDto.AspNetUserRoles = AllUserRole;
+            //var AllUserRole = (from p in _adminService.GetAllUserRoles()
+            //                   where Convert.ToInt32(p.RoleId) > minRoleId
+            //                   select p).ToList();
+
 
             List<AspNetUser> userList = new List<AspNetUser>();
-            foreach (var userr in AllUserRole)
+            foreach (var userr in usersRoles)
             {
-                var usr = _adminService.GetListUsers(x => x.Id == userr.UserId).First();
+                var usr = _adminService.GetAllUsers().Single(x => x.Id == userr.UserId);
                 userList.Add(usr);
             }
-            _usersAndRolesDto.AspNetUsers = userList;
 
             List<AspNetRole> roleList = new List<AspNetRole>();
-            foreach (var rl in AllRole)
+            foreach (var rl in usersRoles)
             {
-                var rol = _adminService.GetListRoles(x => x.Id == rl.Id).First();
+                var rol = _adminService.GetListRoles(x => x.Id == rl.RoleId).First();
                 roleList.Add(rol);
             }
+            _usersAndRolesDto.AspNetUsers = userList;
+            _usersAndRolesDto.AspNetUserRoles = usersRoles.ToList();
             _usersAndRolesDto.AspNetRoles = roleList;
-
 
             return View(_usersAndRolesDto);
         }
@@ -96,7 +96,7 @@ namespace UI.WebMvcCore.Controllers
 
             var userRoleId = (from p in _adminService.GetAllUserRoles()
                               where p.UserId == usrId
-                              select p.RoleId).ToList(); // login olan kullanici roleId'leri string            
+                              select p.RoleId).ToList(); // login olan kullanici roleId'leri string
 
             int diziBoy = userRoleId.Count();
             int[] listRoleId = new int[diziBoy]; // int roleId dizisi
@@ -183,6 +183,5 @@ namespace UI.WebMvcCore.Controllers
             }
             return kucuk;
         }
-
     }
 }
