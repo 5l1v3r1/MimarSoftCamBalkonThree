@@ -130,7 +130,7 @@ namespace UI.WebMvcCore
             {
                 endpoints.MapControllerRoute(
                          name: "default",
-                         pattern: "{controller=Home}/{action=Index}/{id?}");
+                         pattern: "{controller=Calculate}/{action=TrendCalculate}/{id?}");
 
                 endpoints.MapControllerRoute(
                         name: "identity",
