@@ -2,9 +2,13 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/UI.WebMvcCore",
+      "sslPort": 0
+    },
     "iisExpress": {
-      "applicationUrl": "http://localhost:37077",
-      "sslPort": 44355
+      "applicationUrl": "http://localhost:44355",
+      "sslPort": 0
     }
   },
   "profiles": {
@@ -13,8 +17,7 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "use64Bit": true
+      }
     },
     "UI.WebMvcCore": {
       "commandName": "Project",
