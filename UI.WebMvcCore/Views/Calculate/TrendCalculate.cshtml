@@ -7,7 +7,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4" style="display:none">
+        <div class="col-sm-12 col-md-4" style="display:none">
             <label>Balkon Tipi</label>
             <select class="form-control form-select" id="balkonModelSecin" tabindex="1">
                 <option selected>Balkon Tipi Seçiniz</option>
@@ -23,7 +23,7 @@
 
         <input name="BalkonMalzemeModeli" hidden value="Trend Süper Lüks" />
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-sm-12 col-md-4">
                 <label asp-for="ProfileLength">Profil Boy</label>
                 <select class="form-control form-select" multiple id="profilBoySelect" asp-for="ProfileLength">
                 </select>
@@ -36,7 +36,7 @@
                 </div>
                 <br />
             </div>
-            <div class="col-md-4">
+            <div class="col-sm-12 col-md-4">
                 <label asp-for="GlassCount">Cam Adet</label>
                 <select class="form-control form-select" multiple id="camAdetSelect" asp-for="GlassCount">
                 </select>
@@ -49,7 +49,7 @@
                 </div>
                 <br />
             </div>
-            <div class="col-md-4">
+            <div class="col-sm-12 col-md-4">
                 <label asp-for="ProfileAngle">Profil Açı</label>
                 <select class="form-control" multiple id="profilAciSelect" asp-for="ProfileAngle">
                 </select>
@@ -65,12 +65,12 @@
         </div>
         <hr />
         <div class="row">
-            <div class="offset-md-4 col-md-4">
+            <div class="offset-md-4 col-sm-12 col-md-4">
                 <label asp-for="KolsuzKanatSayisi">Kolsuz Kanat Sayısı</label>
                 <input type="number" min="0" max="9" class="form-control" asp-for="KolsuzKanatSayisi" id="kolsuzKanatSayisi" tabindex="5">
                 <hr />
             </div>
-            <div class="col-md-4">
+            <div class="col-sm-12 col-md-4">
                 <label asp-for="BalconyHeight">Balkon Yükseklik</label>
                 <input type="number" min="500" max="5000" class="form-control" asp-for="BalconyHeight" id="balkonYukseklik" tabindex="6">
                 <hr />
@@ -92,6 +92,7 @@
 
     <br />
 </div>
+
 <script src="~/js/Calculate.js"></script>
 
 @section Scripts {

@@ -34,8 +34,15 @@ namespace UI.WebMvcCore.Controllers
             _calculateService.TrendCalculate(balconyCalculateDTO);
 
             string result = Print(balconyCalculateDTO);
-            return Redirect(result);
-            //return View(balconyCalculateDTO);
+            try
+            {
+                return Redirect(result);
+            }
+            catch (Exception x)
+            {
+                return BadRequest(x);
+            }
+            //return Ok(result);
         }
 
         public string Print(BalconyCalculateDto balconyCalculateDTO)
@@ -56,7 +63,7 @@ namespace UI.WebMvcCore.Controllers
             pd.Print();
             //pd.Dispose();
 
-            return result;
+            return "/PDF/" + newFile;
         }
 
         public IActionResult IsiCamSistem()
@@ -81,10 +88,14 @@ namespace UI.WebMvcCore.Controllers
         [HttpPost]
         public IActionResult SurmeSistem(BalconyCalculateDto balconyCalculateDTO)
         {
-            _calculateService.SurmeSistemCalculate(balconyCalculateDTO);
+            if (ModelState.IsValid)
+            {
+                _calculateService.SurmeSistemCalculate(balconyCalculateDTO);
 
-            string result = Print(balconyCalculateDTO);
-            return Redirect(result);
+                string result = Print(balconyCalculateDTO);
+                return Redirect(result);
+            }
+            return View();
         }
     }
 }

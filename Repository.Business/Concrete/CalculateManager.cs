@@ -153,7 +153,7 @@ namespace Repository.Business.Concrete
         public void SurmeSistemCalculate(BalconyCalculateDto balconyCalculateDTO)
         {
             Temizle();
-            if (balconyCalculateDTO != null)
+            if (balconyCalculateDTO != null && balconyCalculateDTO.ProfileLength != null && balconyCalculateDTO.BalconyHeight != null)
             {
                 int profilAdet = balconyCalculateDTO.ProfileLength.Length;
 

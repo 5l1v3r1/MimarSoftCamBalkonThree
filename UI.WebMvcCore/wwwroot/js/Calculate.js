@@ -1,5 +1,6 @@
 ﻿$(function () {
-    var baseUrl = "https://localhost:44300/";
+    //var baseUrl = "https://localhost:44300/";
+    var baseUrl = window.location.origin;
 
     $("#balkonModelSecin").change(function () {
         var value = $("#balkonModelSecin").val();
@@ -17,23 +18,24 @@
         if (txt == "") {
             alert("Boş değer girilemez");
             $("#profilBoyInput").focus();
-            return;
+            return false;
         }
         let nmbr = parseInt(txt);
         if (nmbr < 100 || nmbr > 15, 000) {
             alert("Profil boyu 100 mm ila 15.000 mm arasında olmalıdır");
             $("#profilBoyInput").focus();
-            return;
+            return false;
         }
         let opt = "<option value=" + txt.toString() + ">" + txt.toString() + "</option>";
         $("#profilBoySelect").append(opt);
         $("#profilBoyInput").val("");
+        return false;
     });
     profilBoyInput.addEventListener("keydown", function (event) {
         if (event.keyCode === 13) {
             event.preventDefault();
             document.getElementById("profilBoyButton").click();
-            return;
+            return false;
         }
     });
     //------------------------------------
