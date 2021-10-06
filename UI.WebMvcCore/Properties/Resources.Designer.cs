@@ -59,5 +59,14 @@ namespace UI.WebMvcCore.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Development.
+        /// </summary>
+        internal static string Staging {
+            get {
+                return ResourceManager.GetString("Staging", resourceCulture);
+            }
+        }
     }
 }

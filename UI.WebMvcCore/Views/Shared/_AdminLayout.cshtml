@@ -4,20 +4,23 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Yönetici</title>
-    <link rel="stylesheet" href="./lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./css/site.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body class="bg-img bg-img-admin">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-blue-100 border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><i>Başer</i><b>Makine</b></a>
+                <a class="navbar-brand" asp-area="" asp-controller="Calculate" asp-action="Index"><i>Başer</i> <b>Makine</b></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Calculate" asp-action="Index">Anasayfa</a>
+                        </li>
                         @{ if (User.Identity.IsAuthenticated)
                             {
                                 var role = User.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Role).FirstOrDefault(x => x.Value == "AKR3P")?.Value;
@@ -38,14 +41,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">CreateUserCompany</a>
                                     </li>
-                                    @*<li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="DeleteCompany">Delete Company</a>
-                                        </li>*@ @*<li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-controller="UserCompanies" asp-action="index">UserCompanies</a>
-                                        </li>*@ @*<li class="nav-item">
-                                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ListUserCompany">List User Company</a>
-                                            </li>*@ }
-                                } }
+                                }
+                            }
+                        }
                     </ul>
                     <div class="float-right">
                         @await Html.PartialAsync("_loginPartial")

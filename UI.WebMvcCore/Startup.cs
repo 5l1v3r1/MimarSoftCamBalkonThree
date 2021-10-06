@@ -92,13 +92,19 @@ namespace UI.WebMvcCore
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseMigrationsEndPoint();
+                //app.UseDatabaseErrorPage();
+                //app.UseBrowserLink();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+            //if (env.IsProduction() || env.IsStaging() || env.IsEnvironment("Staging_2"))
+            //{
+            //    app.UseExceptionHandler("/Error");
+            //    app.UseHsts();
+            //}
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -130,7 +136,7 @@ namespace UI.WebMvcCore
             {
                 endpoints.MapControllerRoute(
                          name: "default",
-                         pattern: "{controller=Calculate}/{action=TrendCalculate}/{id?}");
+                         pattern: "{controller=Calculate}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
                         name: "identity",

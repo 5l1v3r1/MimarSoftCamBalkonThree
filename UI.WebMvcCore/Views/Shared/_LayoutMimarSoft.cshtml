@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-ozel2 border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><i>Başer</i><b>Makine</b></a>
+                <a class="navbar-brand" asp-area="" asp-controller="Calculate" asp-action="Index"><i>Başer</i> <b>Makine</b></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,11 +20,8 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Calculate" asp-action="TrendCalculate">Anasayfa</a>
+                            <a class="nav-link text-dark" asp-controller="Calculate" asp-action="Index">Anasayfa</a>
                         </li>
-                        @*<li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Demo">Demo</a>
-                        </li>*@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Calculate" asp-action="TrendCalculate">Trend Lüks</a>
                         </li>
@@ -36,29 +33,6 @@
                         </li>
                         @{ if (User.Identity.IsAuthenticated)
                             {
-                                var role = User.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Role).FirstOrDefault(x => x.Value == "Dealers");
-                                var result = (role == null) ? "" : role.Value;
-                                if (result == "Dealers")
-                                {
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-controller="" asp-action="">Bayii Girişi</a>
-                                    </li>
-                                }
-                            } }
-
-                        @{ if (User.Identity.IsAuthenticated)
-                            {
-                                var role = User.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Role).FirstOrDefault(x => x.Value == "Factories");
-                                var result = (role == null) ? "" : role.Value;
-                                if (result == "Factories")
-                                {
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-controller="" asp-action="">Firmamı Düzenle</a>
-                                    </li>
-                                }
-                            } }
-                        @{ if (User.Identity.IsAuthenticated)
-                            {
                                 var role = User.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Role).FirstOrDefault(x => x.Value == "AKR3P" || x.Value == "YÖNETİM" || x.Value == "FABRİKA");
                                 var result = (role == null) ? "" : role.Value;
                                 if (result == "AKR3P" || result == "YÖNETİM" || result == "FABRİKA")
@@ -67,7 +41,8 @@
                                         <a class="nav-link text-dark" asp-controller="FactoryAdmin" asp-action="UserRoles">Admin</a>
                                     </li>
                                 }
-                            } }
+                            }
+                        }
                     </ul>
                     <div class="float-right">
                         @await Html.PartialAsync("_loginPartial")

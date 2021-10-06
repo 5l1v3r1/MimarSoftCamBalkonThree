@@ -39,10 +39,12 @@ namespace Repository.DataAccess.Concrete.EFCore.DbContexts
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Provider=sqloledb;Data Source=SQL5108.site4now.net,1433;Initial Catalog=db_a7a56c_orguntay;User Id=db_a7a56c_orguntay_admin;Password=Papatya1453;");
+                //optionsBuilder.UseSqlServer("Provider=sqloledb;Data Source=SQL5108.site4now.net,1433;Initial Catalog=db_a7a56c_orguntay;User Id=db_a7a56c_orguntay_admin;Password=Papatya1453;");
+                //optionsBuilder.UseSqlServer(@"Data Source=SQL5108.site4now.net;Initial Catalog=db_a7a56c_orguntay;User Id=db_a7a56c_orguntay_admin;Password=Papatya1453"); // BEDEVA
+                optionsBuilder.UseSqlServer("Server=77.245.159.8\\MSSQLSERVER2019; Initial Catalog=mimarsof_; user Id=akr3p; pwd=Rr3tt5!3; Trusted_Connection=False"); // Parola bu!!!
+                //optionsBuilder.UseSqlServer(@"Data Source=77.245.159.8;Initial Catalog=mimarsof_;User Id=mimarsof;Password=Papatya1i=5stqMs42Ph7.%a453");
                 //optionsBuilder.UseSqlServer("Data Source=DESKTOP-TUU483Q;Initial Catalog=MimarSoft-Orguntay-06ST8W-T1T46;Integrated Security=True;MultipleActiveResultSets=True");
-                // akr3p     Rr3tt5!3     mimarsof_     77.245.159.18\MSSQLSERVER2019
-                //                        MimarSoft-Orguntay-06ST8W-T1T46       78.175.56.43
+
             }
         }
 

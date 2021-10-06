@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Business.Abstract;
 using Repository.Entities.DTOs;
@@ -23,12 +24,14 @@ namespace UI.WebMvcCore.Controllers
             return View();
         }
 
+        [Authorize(Roles = "AKR3P,YÖNETİM,FABRİKA,BAYİİ")]
         public IActionResult TrendCalculate()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "AKR3P,YÖNETİM,FABRİKA,BAYİİ")]
         public IActionResult TrendCalculate(BalconyCalculateDto balconyCalculateDTO)
         {
             _calculateService.TrendCalculate(balconyCalculateDTO);
@@ -66,12 +69,14 @@ namespace UI.WebMvcCore.Controllers
             return "/PDF/" + newFile;
         }
 
+        [Authorize(Roles = "AKR3P,YÖNETİM,FABRİKA,BAYİİ")]
         public IActionResult IsiCamSistem()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "AKR3P,YÖNETİM,FABRİKA,BAYİİ")]
         public IActionResult IsiCamSistem(BalconyCalculateDto balconyCalculateDTO)
         {
             _calculateService.IsiCamCalculate(balconyCalculateDTO);
@@ -80,12 +85,14 @@ namespace UI.WebMvcCore.Controllers
             return Redirect(result);
         }
 
+        [Authorize(Roles = "AKR3P,YÖNETİM,FABRİKA,BAYİİ,USER")]
         public IActionResult SurmeSistem()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "AKR3P,YÖNETİM,FABRİKA,BAYİİ,USER")]
         public IActionResult SurmeSistem(BalconyCalculateDto balconyCalculateDTO)
         {
             if (ModelState.IsValid)

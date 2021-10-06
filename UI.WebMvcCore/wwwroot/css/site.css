@@ -117,3 +117,8 @@ body {
 .form-check {
     margin-left: 10px;
 }
+
+select {
+    -webkit-appearance: menulist-textfield;
+    height: 99px;
+}
